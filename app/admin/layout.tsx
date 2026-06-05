@@ -2,6 +2,9 @@ import { requireAdmin } from '@/lib/auth';
 import { logout } from '@/actions/auth';
 import Link from 'next/link';
 
+// Admin pages use cookies for auth — never statically rendered
+export const dynamic = 'force-dynamic';
+
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   await requireAdmin();
 
