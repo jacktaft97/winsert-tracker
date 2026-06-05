@@ -2,7 +2,10 @@ import { Resend } from 'resend';
 import type { Order } from './db';
 import { getActiveStage } from './stages';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy — avoids creating a Resend instance (and its Authorization header) at build time
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 export function buildUpdateEmail(
   order: Order,
@@ -54,7 +57,7 @@ export async function sendUpdateEmail(order: Order): Promise<void> {
   const baseUrl = process.env.BASE_URL!;
   const { subject, html } = buildUpdateEmail(order, baseUrl);
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from: process.env.RESEND_FROM_EMAIL!,
     to: order.customer_email,
     subject,
