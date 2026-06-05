@@ -1,8 +1,9 @@
-import { sql } from './db';
+import { getSql } from './db';
 import type { Order, Stage } from './db';
 import { initStages } from './stages';
 
 export async function getAllOrders(): Promise<Order[]> {
+  const sql = getSql();
   const rows = await sql`
     SELECT * FROM orders ORDER BY updated_at DESC
   `;
@@ -10,6 +11,7 @@ export async function getAllOrders(): Promise<Order[]> {
 }
 
 export async function getOrderById(id: string): Promise<Order | null> {
+  const sql = getSql();
   const rows = await sql`
     SELECT * FROM orders WHERE id = ${id}
   `;
@@ -18,6 +20,7 @@ export async function getOrderById(id: string): Promise<Order | null> {
 }
 
 export async function getOrderByToken(token: string): Promise<Order | null> {
+  const sql = getSql();
   const rows = await sql`
     SELECT * FROM orders WHERE share_token = ${token}
   `;
@@ -34,6 +37,7 @@ export async function createOrder(data: {
   contact_phone: string;
   contact_email: string;
 }): Promise<Order> {
+  const sql = getSql();
   const stages = JSON.stringify(initStages());
   const rows = await sql`
     INSERT INTO orders (
@@ -63,6 +67,7 @@ export async function updateOrder(
     stages: Stage[];
   }
 ): Promise<Order> {
+  const sql = getSql();
   const stages = JSON.stringify(data.stages);
   const rows = await sql`
     UPDATE orders SET

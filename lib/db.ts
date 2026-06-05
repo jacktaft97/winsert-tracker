@@ -1,6 +1,12 @@
 import { neon } from '@neondatabase/serverless';
 
-export const sql = neon(process.env.DATABASE_URL!);
+// Lazy singleton — neon() is called only when the first query runs,
+// not at module import time (which happens during Next.js build analysis).
+let _sql: ReturnType<typeof neon> | null = null;
+export function getSql() {
+  if (!_sql) _sql = neon(process.env.DATABASE_URL!);
+  return _sql;
+}
 
 export type StageStatus = 'pending' | 'active' | 'complete';
 
