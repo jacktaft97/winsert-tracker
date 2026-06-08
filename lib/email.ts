@@ -57,10 +57,17 @@ export async function sendUpdateEmail(order: Order): Promise<void> {
   const baseUrl = process.env.BASE_URL!;
   const { subject, html } = buildUpdateEmail(order, baseUrl);
 
-  await getResend().emails.send({
+  const { data, error } = await getResend().emails.send({
     from: process.env.RESEND_FROM_EMAIL!,
     to: order.customer_email,
     subject,
     html,
   });
+
+  if (error) {
+    console.error('[sendUpdateEmail] Resend error:', error);
+    throw new Error(`Failed to send email: ${error.message}`);
+  }
+
+  console.log('[sendUpdateEmail] Sent email id:', data?.id, '→', order.customer_email);
 }
