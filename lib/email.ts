@@ -57,9 +57,12 @@ export async function sendUpdateEmail(order: Order): Promise<void> {
   const baseUrl = process.env.BASE_URL!;
   const { subject, html } = buildUpdateEmail(order, baseUrl);
 
+  // Send to all customer emails; fall back to the primary if the array is empty
+  const recipients = order.customer_emails?.length ? order.customer_emails : [order.customer_email];
+
   const { data, error } = await getResend().emails.send({
     from: process.env.RESEND_FROM_EMAIL!,
-    to: order.customer_email,
+    to: recipients,
     subject,
     html,
   });

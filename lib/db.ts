@@ -23,6 +23,7 @@ export type Order = {
   share_token: string;
   customer_name: string;
   customer_email: string;
+  customer_emails: string[];
   project_name: string;
   eta_date: string | null;
   contact_name: string;

@@ -9,9 +9,14 @@ import type { Stage } from '@/lib/db';
 export async function createOrderAction(formData: FormData) {
   await requireAdmin();
 
+  const primaryEmail = formData.get('customer_email') as string;
+  const extraEmails = formData.getAll('customer_email_extra').map((e) => e as string).filter(Boolean);
+  const allEmails = [primaryEmail, ...extraEmails].filter(Boolean);
+
   const order = await createOrder({
     customer_name: formData.get('customer_name') as string,
-    customer_email: formData.get('customer_email') as string,
+    customer_email: primaryEmail,
+    customer_emails: allEmails,
     project_name: formData.get('project_name') as string,
     eta_date: (formData.get('eta_date') as string) || null,
     contact_name: formData.get('contact_name') as string,
@@ -56,6 +61,11 @@ export async function updateOrderAction(formData: FormData) {
     contact2_name: (formData.get('contact2_name') as string) || null,
     contact2_phone: (formData.get('contact2_phone') as string) || null,
     contact2_email: (formData.get('contact2_email') as string) || null,
+    customer_emails: (() => {
+      const primary = formData.get('customer_email') as string;
+      const extra = formData.getAll('customer_email_extra').map((e) => e as string).filter(Boolean);
+      return [primary, ...extra].filter(Boolean);
+    })(),
     stages,
   });
 

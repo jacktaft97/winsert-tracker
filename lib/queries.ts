@@ -31,6 +31,7 @@ export async function getOrderByToken(token: string): Promise<Order | null> {
 export async function createOrder(data: {
   customer_name: string;
   customer_email: string;
+  customer_emails: string[];
   project_name: string;
   eta_date: string | null;
   contact_name: string;
@@ -42,14 +43,15 @@ export async function createOrder(data: {
 }): Promise<Order> {
   const sql = getSql();
   const stages = JSON.stringify(initStages());
+  const emailsJson = JSON.stringify(data.customer_emails);
   const rows = await sql`
     INSERT INTO orders (
-      customer_name, customer_email, project_name, eta_date,
+      customer_name, customer_email, customer_emails, project_name, eta_date,
       contact_name, contact_phone, contact_email,
       contact2_name, contact2_phone, contact2_email,
       stages
     ) VALUES (
-      ${data.customer_name}, ${data.customer_email}, ${data.project_name},
+      ${data.customer_name}, ${data.customer_email}, ${emailsJson}::jsonb, ${data.project_name},
       ${data.eta_date},
       ${data.contact_name}, ${data.contact_phone}, ${data.contact_email},
       ${data.contact2_name}, ${data.contact2_phone}, ${data.contact2_email},
@@ -66,6 +68,7 @@ export async function updateOrder(
   data: {
     customer_name: string;
     customer_email: string;
+    customer_emails: string[];
     project_name: string;
     eta_date: string | null;
     contact_name: string;
@@ -79,20 +82,22 @@ export async function updateOrder(
 ): Promise<Order> {
   const sql = getSql();
   const stages = JSON.stringify(data.stages);
+  const emailsJson = JSON.stringify(data.customer_emails);
   const rows = await sql`
     UPDATE orders SET
-      customer_name  = ${data.customer_name},
-      customer_email = ${data.customer_email},
-      project_name   = ${data.project_name},
-      eta_date       = ${data.eta_date},
-      contact_name   = ${data.contact_name},
-      contact_phone  = ${data.contact_phone},
-      contact_email  = ${data.contact_email},
-      contact2_name  = ${data.contact2_name},
-      contact2_phone = ${data.contact2_phone},
-      contact2_email = ${data.contact2_email},
-      stages         = ${stages}::jsonb,
-      updated_at     = now()
+      customer_name   = ${data.customer_name},
+      customer_email  = ${data.customer_email},
+      customer_emails = ${emailsJson}::jsonb,
+      project_name    = ${data.project_name},
+      eta_date        = ${data.eta_date},
+      contact_name    = ${data.contact_name},
+      contact_phone   = ${data.contact_phone},
+      contact_email   = ${data.contact_email},
+      contact2_name   = ${data.contact2_name},
+      contact2_phone  = ${data.contact2_phone},
+      contact2_email  = ${data.contact2_email},
+      stages          = ${stages}::jsonb,
+      updated_at      = now()
     WHERE id = ${id}
     RETURNING *
   `;
