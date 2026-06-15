@@ -72,12 +72,6 @@ export default async function CustomerPage({
                 >
                   {order.contact_email}
                 </a>
-                <a
-                  href={`tel:${order.contact_phone}`}
-                  className="mt-4 block text-center bg-blue-600 active:bg-blue-700 text-white font-semibold py-3.5 rounded-xl transition-colors text-base"
-                >
-                  Call {order.contact_name}
-                </a>
               </div>
 
               {/* Secondary contact — only shown if filled in */}
@@ -99,14 +93,6 @@ export default async function CustomerPage({
                       className="block mt-1 text-blue-600 text-sm break-all"
                     >
                       {order.contact2_email}
-                    </a>
-                  )}
-                  {order.contact2_phone && (
-                    <a
-                      href={`tel:${order.contact2_phone}`}
-                      className="mt-4 block text-center bg-gray-700 active:bg-gray-800 text-white font-semibold py-3.5 rounded-xl transition-colors text-base"
-                    >
-                      Call {order.contact2_name}
                     </a>
                   )}
                 </div>
