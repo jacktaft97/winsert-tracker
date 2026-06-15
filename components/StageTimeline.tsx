@@ -10,6 +10,27 @@ export function StageTimeline({ stages }: { stages: Stage[] }) {
   );
 }
 
+function MfgProgress({ completed, total }: { completed: number; total: number }) {
+  const pct = Math.min(100, Math.round((completed / total) * 100));
+  return (
+    <div className="mt-3">
+      <div className="flex justify-between items-center mb-1.5">
+        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Production Progress</span>
+        <span className="text-xs font-bold text-gray-700">{completed} / {total} units &nbsp;·&nbsp; {pct}%</span>
+      </div>
+      <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+        <div
+          className="h-3 rounded-full transition-all duration-500"
+          style={{
+            width: `${pct}%`,
+            background: pct === 100 ? '#22c55e' : '#2563eb',
+          }}
+        />
+      </div>
+    </div>
+  );
+}
+
 function StageRow({ stage, isLast }: { stage: Stage; isLast: boolean }) {
   const isComplete = stage.status === 'complete';
   const isActive = stage.status === 'active';
@@ -70,6 +91,11 @@ function StageRow({ stage, isLast }: { stage: Stage; isLast: boolean }) {
         {stage.note && (
           <p className="text-sm text-gray-600 mt-1 leading-relaxed">{stage.note}</p>
         )}
+        {stage.name === 'Manufacturing/Quality Check' &&
+          stage.mfg_total != null &&
+          stage.mfg_total > 0 && (
+            <MfgProgress completed={stage.mfg_completed ?? 0} total={stage.mfg_total} />
+          )}
       </div>
     </div>
   );
