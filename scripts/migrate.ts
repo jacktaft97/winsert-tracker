@@ -25,6 +25,14 @@ async function migrate() {
   console.log('✓ orders table');
 
   await sql`
+    ALTER TABLE orders
+      ADD COLUMN IF NOT EXISTS contact2_name  TEXT,
+      ADD COLUMN IF NOT EXISTS contact2_phone TEXT,
+      ADD COLUMN IF NOT EXISTS contact2_email TEXT
+  `;
+  console.log('✓ secondary contact columns');
+
+  await sql`
     CREATE TABLE IF NOT EXISTS settings (
       key        TEXT PRIMARY KEY,
       value      TEXT NOT NULL,
