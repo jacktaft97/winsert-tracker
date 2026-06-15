@@ -16,10 +16,10 @@ export default async function OrderEditorPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ saved?: string; created?: string }>;
+  searchParams: Promise<{ saved?: string; created?: string; emailError?: string }>;
 }) {
   const { id } = await params;
-  const { saved, created } = await searchParams;
+  const { saved, created, emailError } = await searchParams;
 
   const order = await getOrderById(id);
   if (!order) notFound();
@@ -43,7 +43,13 @@ export default async function OrderEditorPage({
         <div className="mb-5 bg-green-900/30 border border-green-700 text-green-400 px-4 py-3 rounded-lg text-sm">
           {created && 'Order created. '}
           {saved === 'notified' && 'Saved and customer notified. '}
-          {saved === 'true' && 'Saved without notification. '}
+          {saved === 'true' && !emailError && 'Saved without notification. '}
+          {saved === 'true' && emailError && 'Order saved. '}
+        </div>
+      )}
+      {emailError && (
+        <div className="mb-5 bg-yellow-900/30 border border-yellow-700 text-yellow-400 px-4 py-3 rounded-lg text-sm">
+          ⚠️ Order saved, but the notification email could not be sent. A verified sending domain is required to email customers. Visit resend.com/domains to set one up.
         </div>
       )}
 
