@@ -54,27 +54,62 @@ export default async function CustomerPage({
 
           {/* Contact card — 1/3 width, sticky on desktop */}
           <div className="mt-12 lg:mt-0">
-            <div className="lg:sticky lg:top-8 bg-gray-50 border border-gray-200 rounded-2xl p-6">
-              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Your Contact</p>
-              <p className="font-bold text-gray-900 text-xl">{order.contact_name}</p>
-              <a
-                href={`tel:${order.contact_phone}`}
-                className="block mt-3 text-blue-600 hover:text-blue-800 font-medium text-lg transition-colors"
-              >
-                {order.contact_phone}
-              </a>
-              <a
-                href={`mailto:${order.contact_email}`}
-                className="block mt-1 text-blue-600 hover:text-blue-800 text-sm transition-colors"
-              >
-                {order.contact_email}
-              </a>
-              <a
-                href={`tel:${order.contact_phone}`}
-                className="mt-5 block text-center bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-colors"
-              >
-                Contact {order.contact_name}
-              </a>
+            <div className="lg:sticky lg:top-8 space-y-4">
+              {/* Primary contact */}
+              <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6">
+                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Primary Contact</p>
+                <p className="font-bold text-gray-900 text-xl">{order.contact_name}</p>
+                <a
+                  href={`tel:${order.contact_phone}`}
+                  className="block mt-3 text-blue-600 hover:text-blue-800 font-medium text-lg transition-colors"
+                >
+                  {order.contact_phone}
+                </a>
+                <a
+                  href={`mailto:${order.contact_email}`}
+                  className="block mt-1 text-blue-600 hover:text-blue-800 text-sm transition-colors"
+                >
+                  {order.contact_email}
+                </a>
+                <a
+                  href={`tel:${order.contact_phone}`}
+                  className="mt-5 block text-center bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-colors"
+                >
+                  Call {order.contact_name}
+                </a>
+              </div>
+
+              {/* Secondary contact — only shown if filled in */}
+              {order.contact2_name && (
+                <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6">
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Secondary Contact</p>
+                  <p className="font-bold text-gray-900 text-xl">{order.contact2_name}</p>
+                  {order.contact2_phone && (
+                    <a
+                      href={`tel:${order.contact2_phone}`}
+                      className="block mt-3 text-blue-600 hover:text-blue-800 font-medium text-lg transition-colors"
+                    >
+                      {order.contact2_phone}
+                    </a>
+                  )}
+                  {order.contact2_email && (
+                    <a
+                      href={`mailto:${order.contact2_email}`}
+                      className="block mt-1 text-blue-600 hover:text-blue-800 text-sm transition-colors"
+                    >
+                      {order.contact2_email}
+                    </a>
+                  )}
+                  {order.contact2_phone && (
+                    <a
+                      href={`tel:${order.contact2_phone}`}
+                      className="mt-5 block text-center bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 rounded-xl transition-colors"
+                    >
+                      Call {order.contact2_name}
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
