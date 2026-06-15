@@ -11,8 +11,10 @@ export default async function CustomerPage({
   const order = await getOrderByToken(token);
   if (!order) notFound();
 
+  // Append T12:00:00 so JS parses the date in local time, not UTC midnight
+  // (UTC midnight causes an off-by-one day error in US timezones)
   const etaDisplay = order.eta_date
-    ? new Date(order.eta_date).toLocaleDateString('en-US', {
+    ? new Date(order.eta_date + 'T12:00:00').toLocaleDateString('en-US', {
         month: 'long',
         day: 'numeric',
         year: 'numeric',
@@ -37,7 +39,7 @@ export default async function CustomerPage({
           <h2 className="text-3xl font-bold text-gray-900 mt-1">{order.project_name}</h2>
           {etaDisplay && (
             <p className="mt-3 inline-flex items-center gap-2 bg-blue-50 text-blue-700 font-semibold text-sm px-4 py-2 rounded-full">
-              Estimated Install: {etaDisplay}
+              Shipping Date: {etaDisplay}
             </p>
           )}
         </div>
