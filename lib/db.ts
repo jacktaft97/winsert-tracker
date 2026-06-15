@@ -18,6 +18,8 @@ export type Stage = {
   completed_at: string | null;
   mfg_completed?: number;
   mfg_total?: number;
+  ship_completed?: number;
+  ship_total?: number;
 };
 
 export type Order = {
