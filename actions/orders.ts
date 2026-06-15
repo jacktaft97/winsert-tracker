@@ -85,13 +85,14 @@ export async function updateOrderAction(formData: FormData) {
   });
 
   if (notify) {
+    let emailSent = false;
     try {
       await sendUpdateEmail(updated);
-      redirect(`/admin/orders/${id}?saved=notified`);
+      emailSent = true;
     } catch (err) {
       console.error('[updateOrderAction] Email failed, order saved:', err);
-      redirect(`/admin/orders/${id}?saved=true&emailError=1`);
     }
+    redirect(`/admin/orders/${id}?saved=${emailSent ? 'notified' : 'true'}${emailSent ? '' : '&emailError=1'}`);
   }
 
   redirect(`/admin/orders/${id}?saved=true`);
