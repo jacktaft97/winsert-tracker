@@ -48,6 +48,11 @@ export async function updateOrderAction(formData: FormData) {
     const mfg_completed = mfgCompletedRaw !== null ? Number(mfgCompletedRaw) : stage.mfg_completed;
     const mfg_total = mfgTotalRaw !== null ? Number(mfgTotalRaw) : stage.mfg_total;
 
+    const shipCompletedRaw = formData.get(`stage_${stage.id}_ship_completed`);
+    const shipTotalRaw = formData.get(`stage_${stage.id}_ship_total`);
+    const ship_completed = shipCompletedRaw !== null ? Number(shipCompletedRaw) : stage.ship_completed;
+    const ship_total = shipTotalRaw !== null ? Number(shipTotalRaw) : stage.ship_total;
+
     return {
       ...stage,
       status: newStatus ?? stage.status,
@@ -55,6 +60,8 @@ export async function updateOrderAction(formData: FormData) {
       completed_at: becameComplete ? new Date().toISOString() : stage.completed_at,
       ...(mfg_completed !== undefined && { mfg_completed }),
       ...(mfg_total !== undefined && { mfg_total }),
+      ...(ship_completed !== undefined && { ship_completed }),
+      ...(ship_total !== undefined && { ship_total }),
     };
   });
 
