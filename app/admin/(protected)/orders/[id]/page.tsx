@@ -66,7 +66,7 @@ export default async function OrderEditorPage({
             <input name="project_name" defaultValue={order.project_name} required className={inputClass} />
           </div>
           <div className="w-48">
-            <label className="block text-sm font-medium text-gray-300 mb-1">Estimated Install Date</label>
+            <label className="block text-sm font-medium text-gray-300 mb-1">Shipping Date</label>
             <input name="eta_date" type="date" defaultValue={order.eta_date ?? ''} className={inputClass} />
           </div>
           <div className="border-t border-gray-700 pt-4">
