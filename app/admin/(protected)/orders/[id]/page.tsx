@@ -1,6 +1,7 @@
 import { getOrderById } from '@/lib/queries';
 import { updateOrderAction } from '@/actions/orders';
 import { CopyLinkButton } from '@/components/CopyLinkButton';
+import { CustomerEmailInput } from '@/components/CustomerEmailInput';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -57,8 +58,11 @@ export default async function OrderEditorPage({
               <input name="customer_name" defaultValue={order.customer_name} required className={inputClass} />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-1">Customer Email</label>
-              <input name="customer_email" type="email" defaultValue={order.customer_email} required className={inputClass} />
+              <label className="block text-sm font-medium text-gray-300 mb-1">Customer Email(s)</label>
+              <CustomerEmailInput
+                primaryEmail={order.customer_email}
+                extraEmails={order.customer_emails?.slice(1) ?? []}
+              />
             </div>
           </div>
           <div>

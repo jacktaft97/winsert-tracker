@@ -1,4 +1,5 @@
 import { createOrderAction } from '@/actions/orders';
+import { CustomerEmailInput } from '@/components/CustomerEmailInput';
 import Link from 'next/link';
 
 const inputClass =
@@ -21,8 +22,8 @@ export default function NewOrderPage() {
             <input name="customer_name" required className={inputClass} placeholder="Sarah Johnson" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Customer Email</label>
-            <input name="customer_email" type="email" required className={inputClass} placeholder="sarah@email.com" />
+            <label className="block text-sm font-medium text-gray-300 mb-1">Customer Email(s)</label>
+            <CustomerEmailInput primaryEmail="" extraEmails={[]} />
           </div>
         </div>
 
