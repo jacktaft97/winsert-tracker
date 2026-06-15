@@ -16,6 +16,8 @@ export type Stage = {
   status: StageStatus;
   note: string;
   completed_at: string | null;
+  mfg_completed?: number;
+  mfg_total?: number;
 };
 
 export type Order = {
