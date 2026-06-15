@@ -42,11 +42,19 @@ export async function updateOrderAction(formData: FormData) {
   const stages: Stage[] = current!.stages.map((stage) => {
     const newStatus = formData.get(`stage_${stage.id}_status`) as Stage['status'];
     const becameComplete = newStatus === 'complete' && stage.status !== 'complete';
+
+    const mfgCompletedRaw = formData.get(`stage_${stage.id}_mfg_completed`);
+    const mfgTotalRaw = formData.get(`stage_${stage.id}_mfg_total`);
+    const mfg_completed = mfgCompletedRaw !== null ? Number(mfgCompletedRaw) : stage.mfg_completed;
+    const mfg_total = mfgTotalRaw !== null ? Number(mfgTotalRaw) : stage.mfg_total;
+
     return {
       ...stage,
       status: newStatus ?? stage.status,
       note: (formData.get(`stage_${stage.id}_note`) as string) ?? stage.note,
       completed_at: becameComplete ? new Date().toISOString() : stage.completed_at,
+      ...(mfg_completed !== undefined && { mfg_completed }),
+      ...(mfg_total !== undefined && { mfg_total }),
     };
   });
 
