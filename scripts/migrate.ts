@@ -22,7 +22,28 @@ async function migrate() {
       updated_at     TIMESTAMPTZ NOT NULL DEFAULT now()
     )
   `;
-  console.log('Migration complete: orders table created');
+  console.log('✓ orders table');
+
+  await sql`
+    CREATE TABLE IF NOT EXISTS settings (
+      key        TEXT PRIMARY KEY,
+      value      TEXT NOT NULL,
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    )
+  `;
+  console.log('✓ settings table');
+
+  await sql`
+    CREATE TABLE IF NOT EXISTS password_reset_tokens (
+      token      TEXT PRIMARY KEY,
+      expires_at TIMESTAMPTZ NOT NULL,
+      used       BOOLEAN NOT NULL DEFAULT false,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    )
+  `;
+  console.log('✓ password_reset_tokens table');
+
+  console.log('Migration complete.');
 }
 
 migrate().catch(console.error);
