@@ -1,14 +1,10 @@
 import type { Stage } from './db';
 
 export const DEFAULT_STAGES = [
-  'Measure',
   'Order Placed',
   'Scheduled',
-  'Manufacturing',
-  'Quality Check',
-  'Shipped',
-  'Installation',
-  'Sign-Off',
+  'Manufacturing/Quality Check',
+  'Shipping',
 ] as const;
 
 export function initStages(): Stage[] {

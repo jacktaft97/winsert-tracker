@@ -39,7 +39,7 @@ export default async function DashboardPage() {
                   </div>
                   <div className="text-right">
                     <p className="text-sm font-medium text-blue-400">{currentStage.name}</p>
-                    <p className="text-xs text-gray-500 mt-0.5">{completedCount} of 8 complete</p>
+                    <p className="text-xs text-gray-500 mt-0.5">{completedCount} of {order.stages.length} complete</p>
                   </div>
                 </div>
               </Link>
