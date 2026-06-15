@@ -16,7 +16,7 @@ export default async function CustomerPage({
   // Extract YYYY-MM-DD from whatever Postgres returns (DATE or full timestamp),
   // then append T12:00:00 so JS parses in local time instead of UTC midnight.
   const etaDisplay = order.eta_date
-    ? new Date(order.eta_date.split('T')[0] + 'T12:00:00').toLocaleDateString('en-US', {
+    ? new Date(new Date(order.eta_date).toISOString().split('T')[0] + 'T12:00:00').toLocaleDateString('en-US', {
         month: 'long',
         day: 'numeric',
         year: 'numeric',
