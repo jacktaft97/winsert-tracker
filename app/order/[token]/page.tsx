@@ -2,6 +2,8 @@ import { getOrderByToken } from '@/lib/queries';
 import { StageTimeline } from '@/components/StageTimeline';
 import { notFound } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 export default async function CustomerPage({
   params,
 }: {
