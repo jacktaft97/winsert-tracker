@@ -41,20 +41,39 @@ export default function NewOrderPage() {
           <input name="eta_date" type="date" className={inputClass} />
         </div>
 
-        <div className="border-t border-gray-700 pt-6">
-          <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Your Contact Info</p>
-          <div className="grid grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-1">Your Name</label>
-              <input name="contact_name" required className={inputClass} placeholder="Jack" />
+        <div className="border-t border-gray-700 pt-6 space-y-5">
+          <div>
+            <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Primary Contact</p>
+            <div className="grid grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Name</label>
+                <input name="contact_name" required className={inputClass} placeholder="Jack" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Phone</label>
+                <input name="contact_phone" required className={inputClass} placeholder="720-555-0100" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                <input name="contact_email" type="email" required className={inputClass} placeholder="jack@alpen.com" />
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-1">Phone</label>
-              <input name="contact_phone" required className={inputClass} placeholder="720-555-0100" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-1">Email</label>
-              <input name="contact_email" type="email" required className={inputClass} placeholder="jack@alpen.com" />
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Secondary Contact <span className="normal-case font-normal text-gray-500">(optional)</span></p>
+            <div className="grid grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Name</label>
+                <input name="contact2_name" className={inputClass} placeholder="Sarah" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Phone</label>
+                <input name="contact2_phone" className={inputClass} placeholder="720-555-0101" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                <input name="contact2_email" type="email" className={inputClass} placeholder="sarah@alpen.com" />
+              </div>
             </div>
           </div>
         </div>

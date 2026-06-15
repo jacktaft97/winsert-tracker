@@ -69,20 +69,39 @@ export default async function OrderEditorPage({
             <label className="block text-sm font-medium text-gray-300 mb-1">Shipping Date</label>
             <input name="eta_date" type="date" defaultValue={order.eta_date ?? ''} className={inputClass} />
           </div>
-          <div className="border-t border-gray-700 pt-4">
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">Your Contact Info</p>
-            <div className="grid grid-cols-3 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">Name</label>
-                <input name="contact_name" defaultValue={order.contact_name} required className={inputClass} />
+          <div className="border-t border-gray-700 pt-4 space-y-4">
+            <div>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">Primary Contact</p>
+              <div className="grid grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-1">Name</label>
+                  <input name="contact_name" defaultValue={order.contact_name} required className={inputClass} />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-1">Phone</label>
+                  <input name="contact_phone" defaultValue={order.contact_phone} required className={inputClass} />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                  <input name="contact_email" type="email" defaultValue={order.contact_email} required className={inputClass} />
+                </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">Phone</label>
-                <input name="contact_phone" defaultValue={order.contact_phone} required className={inputClass} />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">Email</label>
-                <input name="contact_email" type="email" defaultValue={order.contact_email} required className={inputClass} />
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">Secondary Contact <span className="normal-case font-normal text-gray-500">(optional)</span></p>
+              <div className="grid grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-1">Name</label>
+                  <input name="contact2_name" defaultValue={order.contact2_name ?? ''} className={inputClass} />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-1">Phone</label>
+                  <input name="contact2_phone" defaultValue={order.contact2_phone ?? ''} className={inputClass} />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                  <input name="contact2_email" type="email" defaultValue={order.contact2_email ?? ''} className={inputClass} />
+                </div>
               </div>
             </div>
           </div>
