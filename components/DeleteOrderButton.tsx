@@ -18,7 +18,7 @@ export function DeleteOrderButton({ orderId }: { orderId: string }) {
       <button
         type="button"
         onClick={handleClick}
-        className="w-full py-2.5 border border-red-800 text-red-400 hover:bg-red-900/30 hover:border-red-600 hover:text-red-300 rounded-lg text-sm font-medium transition-colors"
+        className="px-5 py-2 border border-red-800 text-red-400 hover:bg-red-900/30 hover:border-red-600 hover:text-red-300 rounded-lg text-sm font-medium transition-colors"
       >
         Delete Order
       </button>
