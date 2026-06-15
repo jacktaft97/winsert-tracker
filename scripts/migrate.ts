@@ -33,6 +33,12 @@ async function migrate() {
   console.log('✓ secondary contact columns');
 
   await sql`
+    ALTER TABLE orders
+      ADD COLUMN IF NOT EXISTS customer_emails JSONB NOT NULL DEFAULT '[]'
+  `;
+  console.log('✓ customer_emails column');
+
+  await sql`
     CREATE TABLE IF NOT EXISTS settings (
       key        TEXT PRIMARY KEY,
       value      TEXT NOT NULL,
