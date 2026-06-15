@@ -165,6 +165,32 @@ export default async function OrderEditorPage({
                       </div>
                     </div>
                   )}
+                  {stage.name === 'Shipping' && (
+                    <div className="flex gap-3 items-center">
+                      <div className="flex-1">
+                        <label className="block text-xs text-gray-400 mb-1">Units Shipped</label>
+                        <input
+                          type="number"
+                          name={`stage_${stage.id}_ship_completed`}
+                          defaultValue={stage.ship_completed ?? ''}
+                          min={0}
+                          className={inputClass}
+                          placeholder="0"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <label className="block text-xs text-gray-400 mb-1">Total Units</label>
+                        <input
+                          type="number"
+                          name={`stage_${stage.id}_ship_total`}
+                          defaultValue={stage.ship_total ?? ''}
+                          min={0}
+                          className={inputClass}
+                          placeholder="0"
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
