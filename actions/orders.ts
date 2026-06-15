@@ -17,6 +17,9 @@ export async function createOrderAction(formData: FormData) {
     contact_name: formData.get('contact_name') as string,
     contact_phone: formData.get('contact_phone') as string,
     contact_email: formData.get('contact_email') as string,
+    contact2_name: (formData.get('contact2_name') as string) || null,
+    contact2_phone: (formData.get('contact2_phone') as string) || null,
+    contact2_email: (formData.get('contact2_email') as string) || null,
   });
 
   redirect(`/admin/orders/${order.id}?created=true`);
@@ -50,6 +53,9 @@ export async function updateOrderAction(formData: FormData) {
     contact_name: formData.get('contact_name') as string,
     contact_phone: formData.get('contact_phone') as string,
     contact_email: formData.get('contact_email') as string,
+    contact2_name: (formData.get('contact2_name') as string) || null,
+    contact2_phone: (formData.get('contact2_phone') as string) || null,
+    contact2_email: (formData.get('contact2_email') as string) || null,
     stages,
   });
 
