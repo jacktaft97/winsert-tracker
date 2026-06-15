@@ -2,6 +2,7 @@ import { getOrderById } from '@/lib/queries';
 import { updateOrderAction } from '@/actions/orders';
 import { CopyLinkButton } from '@/components/CopyLinkButton';
 import { CustomerEmailInput } from '@/components/CustomerEmailInput';
+import { DeleteOrderButton } from '@/components/DeleteOrderButton';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -217,6 +218,11 @@ export default async function OrderEditorPage({
           </button>
         </div>
       </form>
+
+      {/* Delete order — outside the save form, with confirmation */}
+      <div className="mt-4 pt-4 border-t border-gray-800">
+        <DeleteOrderButton orderId={order.id} />
+      </div>
     </div>
   );
 }
