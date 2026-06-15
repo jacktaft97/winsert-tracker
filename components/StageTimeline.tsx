@@ -10,13 +10,23 @@ export function StageTimeline({ stages }: { stages: Stage[] }) {
   );
 }
 
-function MfgProgress({ completed, total }: { completed: number; total: number }) {
+function MfgProgress({
+  label,
+  completed,
+  total,
+  unitLabel = 'units',
+}: {
+  label: string;
+  completed: number;
+  total: number;
+  unitLabel?: string;
+}) {
   const pct = Math.min(100, Math.round((completed / total) * 100));
   return (
     <div className="mt-3">
       <div className="flex justify-between items-center mb-1.5">
-        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Production Progress</span>
-        <span className="text-xs font-bold text-gray-700">{completed} / {total} units &nbsp;·&nbsp; {pct}%</span>
+        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">{label}</span>
+        <span className="text-xs font-bold text-gray-700">{completed} / {total} {unitLabel} &nbsp;·&nbsp; {pct}%</span>
       </div>
       <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
         <div
@@ -94,7 +104,12 @@ function StageRow({ stage, isLast }: { stage: Stage; isLast: boolean }) {
         {stage.name === 'Manufacturing/Quality Check' &&
           stage.mfg_total != null &&
           stage.mfg_total > 0 && (
-            <MfgProgress completed={stage.mfg_completed ?? 0} total={stage.mfg_total} />
+            <MfgProgress label="Production Progress" completed={stage.mfg_completed ?? 0} total={stage.mfg_total} />
+          )}
+        {stage.name === 'Shipping' &&
+          stage.ship_total != null &&
+          stage.ship_total > 0 && (
+            <MfgProgress label="Shipping Progress" completed={stage.ship_completed ?? 0} total={stage.ship_total} unitLabel="units shipped" />
           )}
       </div>
     </div>
