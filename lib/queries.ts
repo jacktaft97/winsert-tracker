@@ -36,17 +36,24 @@ export async function createOrder(data: {
   contact_name: string;
   contact_phone: string;
   contact_email: string;
+  contact2_name: string | null;
+  contact2_phone: string | null;
+  contact2_email: string | null;
 }): Promise<Order> {
   const sql = getSql();
   const stages = JSON.stringify(initStages());
   const rows = await sql`
     INSERT INTO orders (
       customer_name, customer_email, project_name, eta_date,
-      contact_name, contact_phone, contact_email, stages
+      contact_name, contact_phone, contact_email,
+      contact2_name, contact2_phone, contact2_email,
+      stages
     ) VALUES (
       ${data.customer_name}, ${data.customer_email}, ${data.project_name},
-      ${data.eta_date}, ${data.contact_name}, ${data.contact_phone},
-      ${data.contact_email}, ${stages}
+      ${data.eta_date},
+      ${data.contact_name}, ${data.contact_phone}, ${data.contact_email},
+      ${data.contact2_name}, ${data.contact2_phone}, ${data.contact2_email},
+      ${stages}
     )
     RETURNING *
   `;
@@ -64,6 +71,9 @@ export async function updateOrder(
     contact_name: string;
     contact_phone: string;
     contact_email: string;
+    contact2_name: string | null;
+    contact2_phone: string | null;
+    contact2_email: string | null;
     stages: Stage[];
   }
 ): Promise<Order> {
@@ -78,6 +88,9 @@ export async function updateOrder(
       contact_name   = ${data.contact_name},
       contact_phone  = ${data.contact_phone},
       contact_email  = ${data.contact_email},
+      contact2_name  = ${data.contact2_name},
+      contact2_phone = ${data.contact2_phone},
+      contact2_email = ${data.contact2_email},
       stages         = ${stages}::jsonb,
       updated_at     = now()
     WHERE id = ${id}

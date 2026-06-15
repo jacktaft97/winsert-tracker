@@ -28,6 +28,9 @@ export type Order = {
   contact_name: string;
   contact_phone: string;
   contact_email: string;
+  contact2_name: string | null;
+  contact2_phone: string | null;
+  contact2_email: string | null;
   stages: Stage[];
   created_at: string;
   updated_at: string;
