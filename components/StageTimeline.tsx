@@ -24,9 +24,9 @@ function MfgProgress({
   const pct = Math.min(100, Math.round((completed / total) * 100));
   return (
     <div className="mt-3">
-      <div className="flex justify-between items-center mb-1.5">
+      <div className="flex flex-wrap justify-between items-baseline gap-x-2 gap-y-0.5 mb-1.5">
         <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">{label}</span>
-        <span className="text-xs font-bold text-gray-700">{completed} / {total} {unitLabel} &nbsp;·&nbsp; {pct}%</span>
+        <span className="text-xs font-bold text-gray-700">{completed} / {total} {unitLabel} · {pct}%</span>
       </div>
       <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
         <div
@@ -81,7 +81,7 @@ function StageRow({ stage, isLast }: { stage: Stage; isLast: boolean }) {
 
       {/* Content */}
       <div className={`${isLast ? 'pb-0' : 'pb-7'} flex-1`}>
-        <div className="flex items-center gap-2 pt-1.5">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 pt-1.5">
           <span
             className={`font-semibold text-base ${
               isComplete ? 'text-gray-900' : isActive ? 'text-blue-700' : 'text-gray-400'
@@ -95,7 +95,7 @@ function StageRow({ stage, isLast }: { stage: Stage; isLast: boolean }) {
             </span>
           )}
           {formattedDate && (
-            <span className="text-xs text-gray-400 ml-auto">{formattedDate}</span>
+            <span className="text-xs text-gray-400 sm:ml-auto">{formattedDate}</span>
           )}
         </div>
         {stage.note && (
