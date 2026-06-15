@@ -71,7 +71,7 @@ export default async function OrderEditorPage({
           </div>
           <div className="w-48">
             <label className="block text-sm font-medium text-gray-300 mb-1">Shipping Date</label>
-            <input name="eta_date" type="date" defaultValue={order.eta_date?.split('T')[0] ?? ''} className={inputClass} />
+            <input name="eta_date" type="date" defaultValue={order.eta_date ?? ''} className={inputClass} />
           </div>
           <div className="border-t border-gray-700 pt-4 space-y-4">
             <div>
