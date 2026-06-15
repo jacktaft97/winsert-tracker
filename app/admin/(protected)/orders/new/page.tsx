@@ -37,7 +37,7 @@ export default function NewOrderPage() {
         </div>
 
         <div className="w-48">
-          <label className="block text-sm font-medium text-gray-300 mb-1">Estimated Install Date</label>
+          <label className="block text-sm font-medium text-gray-300 mb-1">Shipping Date</label>
           <input name="eta_date" type="date" className={inputClass} />
         </div>
 
