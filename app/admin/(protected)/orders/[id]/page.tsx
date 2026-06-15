@@ -219,8 +219,8 @@ export default async function OrderEditorPage({
         </div>
       </form>
 
-      {/* Bottom row: Delete on the left, aligned with save buttons above */}
-      <div className="flex justify-start mt-3">
+      {/* Delete order — outside the save form, with confirmation */}
+      <div className="mt-4 pt-4 border-t border-gray-800">
         <DeleteOrderButton orderId={order.id} />
       </div>
     </div>
