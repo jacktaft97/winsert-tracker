@@ -131,13 +131,41 @@ export default async function OrderEditorPage({
                     <option value="complete">Complete</option>
                   </select>
                 </div>
-                <textarea
-                  name={`stage_${stage.id}_note`}
-                  defaultValue={stage.note}
-                  placeholder="Add a note for the customer…"
-                  rows={2}
-                  className={`${inputClass} resize-none`}
-                />
+                <div className="space-y-2">
+                  <textarea
+                    name={`stage_${stage.id}_note`}
+                    defaultValue={stage.note}
+                    placeholder="Add a note for the customer…"
+                    rows={2}
+                    className={`${inputClass} resize-none`}
+                  />
+                  {stage.name === 'Manufacturing/Quality Check' && (
+                    <div className="flex gap-3 items-center">
+                      <div className="flex-1">
+                        <label className="block text-xs text-gray-400 mb-1">Units Completed</label>
+                        <input
+                          type="number"
+                          name={`stage_${stage.id}_mfg_completed`}
+                          defaultValue={stage.mfg_completed ?? ''}
+                          min={0}
+                          className={inputClass}
+                          placeholder="0"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <label className="block text-xs text-gray-400 mb-1">Total Units</label>
+                        <input
+                          type="number"
+                          name={`stage_${stage.id}_mfg_total`}
+                          defaultValue={stage.mfg_total ?? ''}
+                          min={0}
+                          className={inputClass}
+                          placeholder="0"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
           </div>
