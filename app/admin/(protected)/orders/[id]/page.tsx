@@ -146,7 +146,7 @@ export default async function OrderEditorPage({
                     rows={2}
                     className={`${inputClass} resize-none`}
                   />
-                  {stage.name === 'Manufacturing/Quality Check' && (
+                  {stage.name === 'Manufacturing' && (
                     <div className="flex gap-3 items-center">
                       <div className="flex-1">
                         <label className="block text-xs text-gray-400 mb-1">Units Completed</label>
