@@ -101,11 +101,6 @@ function StageRow({ stage, isLast }: { stage: Stage; isLast: boolean }) {
         {stage.note && (
           <p className="text-sm text-gray-600 mt-1 leading-relaxed">{stage.note}</p>
         )}
-        {stage.name === 'Manufacturing' &&
-          stage.mfg_total != null &&
-          stage.mfg_total > 0 && (
-            <MfgProgress label="Production Progress" completed={stage.mfg_completed ?? 0} total={stage.mfg_total} />
-          )}
         {stage.name === 'Shipping' &&
           stage.ship_total != null &&
           stage.ship_total > 0 && (
