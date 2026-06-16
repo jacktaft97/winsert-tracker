@@ -24,7 +24,7 @@ export default async function OrderEditorPage({
   const order = await getOrderById(id);
   if (!order) notFound();
 
-  const customerUrl = `${process.env.BASE_URL}/order/${order.share_token}`;
+  const customerUrl = `${process.env.BASE_URL}/WinsertOrder/${order.share_token}`;
 
   return (
     <div>

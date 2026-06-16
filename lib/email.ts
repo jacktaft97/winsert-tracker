@@ -34,7 +34,7 @@ export function buildUpdateEmail(
       ${stageBlock}
 
       <p style="margin:24px 0;">
-        <a href="${baseUrl}/order/${order.share_token}"
+        <a href="${baseUrl}/WinsertOrder/${order.share_token}"
            style="background:#2563eb;color:#fff;padding:12px 24px;border-radius:6px;text-decoration:none;font-weight:600;display:inline-block;">
           View Your Order Progress →
         </a>
