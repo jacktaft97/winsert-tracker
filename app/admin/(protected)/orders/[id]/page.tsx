@@ -2,6 +2,7 @@ import { getOrderById } from '@/lib/queries';
 import { updateOrderAction } from '@/actions/orders';
 import { CopyLinkButton } from '@/components/CopyLinkButton';
 import { CustomerEmailInput } from '@/components/CustomerEmailInput';
+import { DeleteOrderButton } from '@/components/DeleteOrderButton';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -197,6 +198,11 @@ export default async function OrderEditorPage({
           </button>
         </div>
       </form>
+
+      {/* Bottom row: Delete on the left, aligned with save buttons above */}
+      <div className="flex justify-start mt-3">
+        <DeleteOrderButton orderId={order.id} />
+      </div>
     </div>
   );
 }
