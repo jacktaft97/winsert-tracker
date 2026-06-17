@@ -1,5 +1,37 @@
 import type { Stage } from '@/lib/db';
 
+// Splits note text on URLs and returns a mix of plain strings and <a> elements
+function linkifyNote(text: string): React.ReactNode[] {
+  const urlRegex = /https?:\/\/[^\s]+/g;
+  const parts: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = urlRegex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    parts.push(
+      <a
+        key={match.index}
+        href={match[0]}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline break-all hover:text-blue-800"
+      >
+        {match[0]}
+      </a>
+    );
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts;
+}
+
 export function StageTimeline({ stages }: { stages: Stage[] }) {
   return (
     <div>
@@ -99,7 +131,7 @@ function StageRow({ stage, isLast }: { stage: Stage; isLast: boolean }) {
           )}
         </div>
         {stage.note && (
-          <p className="text-sm text-gray-600 mt-1 leading-relaxed">{stage.note}</p>
+          <p className="text-sm text-gray-600 mt-1 leading-relaxed">{linkifyNote(stage.note)}</p>
         )}
         {stage.name === 'Shipping' &&
           stage.ship_total != null &&
