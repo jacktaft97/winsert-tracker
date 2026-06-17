@@ -109,8 +109,3 @@ export async function deleteOrder(id: string): Promise<void> {
   const sql = getSql();
   await sql`DELETE FROM orders WHERE id = ${id}`;
 }
-
-export async function deleteOrder(id: string): Promise<void> {
-  const sql = getSql();
-  await sql`DELETE FROM orders WHERE id = ${id}`;
-}
