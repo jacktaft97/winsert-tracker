@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 import { requireAdmin } from '@/lib/auth';
-import { createOrder, getOrderById, updateOrder } from '@/lib/queries';
+import { createOrder, getOrderById, updateOrder, deleteOrder } from '@/lib/queries';
 import { sendUpdateEmail } from '@/lib/email';
 import type { Stage } from '@/lib/db';
 
@@ -96,4 +96,11 @@ export async function updateOrderAction(formData: FormData) {
   }
 
   redirect(`/admin/orders/${id}?saved=true`);
+}
+
+export async function deleteOrderAction(formData: FormData) {
+  await requireAdmin();
+  const id = formData.get('order_id') as string;
+  await deleteOrder(id);
+  redirect('/admin/dashboard');
 }
