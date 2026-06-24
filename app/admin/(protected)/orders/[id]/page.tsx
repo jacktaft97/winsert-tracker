@@ -3,6 +3,7 @@ import { updateOrderAction } from '@/actions/orders';
 import { CopyLinkButton } from '@/components/CopyLinkButton';
 import { CustomerEmailInput } from '@/components/CustomerEmailInput';
 import { DeleteOrderButton } from '@/components/DeleteOrderButton';
+import { AutoResizeTextarea } from '@/components/AutoResizeTextarea';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -139,7 +140,7 @@ export default async function OrderEditorPage({
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <textarea
+                  <AutoResizeTextarea
                     name={`stage_${stage.id}_note`}
                     defaultValue={stage.note}
                     placeholder="Add a note for the customer…"
