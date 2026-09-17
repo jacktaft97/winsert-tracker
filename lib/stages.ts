@@ -3,7 +3,6 @@ import type { Stage } from './db';
 export const DEFAULT_STAGES = [
   'Order Placed',
   'Scheduled',
-  'Manufacturing',
   'Shipping',
 ] as const;
 

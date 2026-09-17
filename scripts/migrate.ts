@@ -57,6 +57,35 @@ async function migrate() {
   `;
   console.log('✓ password_reset_tokens table');
 
+  // Remove 'Manufacturing' stage from all existing orders and renumber remaining stages
+  await sql`
+    UPDATE orders AS o
+    SET stages = updated.new_stages
+    FROM (
+      SELECT
+        id,
+        jsonb_agg(
+          jsonb_set(stage_elem, '{id}', to_jsonb(row_num::int))
+          ORDER BY row_num
+        ) AS new_stages
+      FROM (
+        SELECT
+          o2.id,
+          stage_elem,
+          ROW_NUMBER() OVER (
+            PARTITION BY o2.id
+            ORDER BY (stage_elem->>'id')::int
+          ) AS row_num
+        FROM orders o2,
+             LATERAL jsonb_array_elements(o2.stages) AS stage_elem
+        WHERE stage_elem->>'name' != 'Manufacturing'
+      ) filtered
+      GROUP BY id
+    ) updated
+    WHERE o.id = updated.id
+  `;
+  console.log('✓ removed Manufacturing stage from existing orders');
+
   console.log('Migration complete.');
 }
 

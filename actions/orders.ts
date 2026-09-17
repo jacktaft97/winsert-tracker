@@ -43,11 +43,6 @@ export async function updateOrderAction(formData: FormData) {
     const newStatus = formData.get(`stage_${stage.id}_status`) as Stage['status'];
     const becameComplete = newStatus === 'complete' && stage.status !== 'complete';
 
-    const mfgCompletedRaw = formData.get(`stage_${stage.id}_mfg_completed`);
-    const mfgTotalRaw = formData.get(`stage_${stage.id}_mfg_total`);
-    const mfg_completed = mfgCompletedRaw !== null ? Number(mfgCompletedRaw) : stage.mfg_completed;
-    const mfg_total = mfgTotalRaw !== null ? Number(mfgTotalRaw) : stage.mfg_total;
-
     const shipCompletedRaw = formData.get(`stage_${stage.id}_ship_completed`);
     const shipTotalRaw = formData.get(`stage_${stage.id}_ship_total`);
     const ship_completed = shipCompletedRaw !== null ? Number(shipCompletedRaw) : stage.ship_completed;
@@ -58,8 +53,6 @@ export async function updateOrderAction(formData: FormData) {
       status: newStatus ?? stage.status,
       note: (formData.get(`stage_${stage.id}_note`) as string) ?? stage.note,
       completed_at: becameComplete ? new Date().toISOString() : stage.completed_at,
-      ...(mfg_completed !== undefined && { mfg_completed }),
-      ...(mfg_total !== undefined && { mfg_total }),
       ...(ship_completed !== undefined && { ship_completed }),
       ...(ship_total !== undefined && { ship_total }),
     };
